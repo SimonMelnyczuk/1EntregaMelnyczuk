@@ -1,0 +1,54 @@
+{% extends "padre.html" %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+<title> {% block tittle %} Plantae-planta {% endblock %}</title>
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-8col-xl-8">
+        <h2>Gestion de formularios</h2>
+        <div class="card" style="width: 25rem;">
+        <div class="card-body">
+            <form action="{% url 'registrarPlanta' %}" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="txtnombre" class="from-control" minlength="2" maxlength="15" placeholder="Nombre de la planta" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="txtnombreCientifico" class="from-control" minlength="2" maxlength="15" placeholder="Nombre Cientifico de la planta" required >
+                </div>
+                <div class="form-group">
+                    <input type="text" name="txtdeInterior" class="from-control" minlength="2" maxlength="15" placeholder="Es de Interior?"  required>
+                </div>
+                <button type="submit" class="btn btn-success btn-block twxt-pink">Guardar planta </button>
+            </form>
+        </div>
+        </div>   
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <h1>Listado de plantas</h1>
+        <div class="table-responsive">
+             <table class="table table-striped">
+                <thead> 
+                    <tr>
+                        <th>nombre</th>
+                        <th>nombreCientifico</th>
+                        <th>deInterior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in planta %}
+                    <tr>
+                        <td> {{c.nombre}}</td>
+                        <td> {{c.nombreCientifico}}</td>
+                        <td> {{c.deInterior}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+             </table>   
+        </div>
+        
+    </div>
+
+    </div>
+</div>
+{% endblock %}
